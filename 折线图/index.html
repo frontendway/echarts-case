@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>折线图</title>
+  <style>
+    #box{
+      width: 600px;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+  <script>
+    const echartIns = echarts.init(document.querySelector('#box'))
+    const options = {
+      // 图表标题
+      title: {
+        text: '浏览量',
+        textStyle: {
+          fontWeight: 'normal',
+          color: '#818181',
+          fontSize: 16
+        },
+        left: 18,
+        top: 5
+      },
+      // 提示框组件
+      tooltip: {
+        trigger: 'axis'
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true // 不让文字超出图表范围
+      },
+      xAxis: {
+        type: 'category',
+        data: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+        // x 轴文字样式设置
+        axisLabel: {
+          fontSize: 14,
+          rotate: 45
+        }
+      },
+      yAxis: {
+        type: 'value',
+        splitLine: {
+          lineStyle: {
+            type: 'dashed' // 设置 x 轴的刻度分割线为虚线
+          }
+        }
+      },
+      series: [
+        {
+          name: '浏览量',
+          type: 'line',
+          lineStyle: {
+            color: '#2fc25b' // 设置折线的颜色
+          },
+          // 隐藏折线上每个阶段上的小圆点
+          showSymbol: false, 
+          // 设置一组数据中的最大值样式
+          markPoint: {
+            symbol: 'circle',
+            symbolSize: 8,
+            // 最大值显示值的设置
+            label: {
+              position: [10, -10]
+            },
+            itemStyle: {
+              color: '#1d92ff' // 最大值小圆点颜色
+            },
+            data: [
+              {
+                type: 'max'
+              }
+            ]
+          },
+          // 折线拐点小圆点标志的样式
+          itemStyle: {
+            color: '#000000'
+          },
+          data: [10, 20, 30, 80, 60, 45, 20]
+        }
+      ]
+    }
+    echartIns.setOption(options)
+  </script>
+</body>
+</html>

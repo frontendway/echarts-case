@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>仪表盘</title>
+  <style>
+    #box{
+      width: 600px;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+  <script>
+    const echartIns = echarts.init(document.querySelector('#box'))
+    const options = {
+      // 图表标题
+      title: {
+        text: '浏览量',
+        textStyle: {
+          fontWeight: 'normal',
+          color: '#818181',
+          fontSize: 16
+        },
+        left: 18,
+        top: 5
+      },
+      // 提示框组件
+      tooltip: {
+        formatter: '{b} : {c}'
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true // 不让文字超出图表范围
+      },
+      series: [
+        {
+          type: 'gauge',
+          // 当前进度盘样式设置
+          progress: {
+            show: true,
+            width: 10,
+            itemStyle: {
+              color: '#fa6400'
+            }
+          },
+          center: ['50%', '56%'],
+          radius: '95%',
+          title: {
+            offsetCenter: [0, '50%'],
+            fontSize: 14,
+            color: '#c4c5c5'
+          },
+          // 整个圆盘大小的样式设置
+          axisLine: {
+            lineStyle: {
+              width: 10
+            }
+          },
+          axisTick: {
+            show: true // 是否显示更加具体的刻度线
+          },
+          // 刻度线
+          splitLine: {
+            show: true,
+            length: 8,
+            lineStyle: {
+              width: 1,
+              color: '#999'
+            }
+          },
+          // 刻度值
+          axisLabel: {
+            show: true,
+            distance: 10,
+            color: '#999',
+            fontSize: 12
+          },
+          // 表盘中间圆点样式设置
+          anchor: {
+            show: true,
+            showAbove: true, // 圆点是否在指针上面
+            size: 16,
+            itemStyle: {
+              borderWidth: 5,
+              borderColor: '#fa6400'
+            }
+          },
+          // value 值的样式设置
+          detail: {
+            valueAnimation: true,
+            fontSize: 20,
+            offsetCenter: [0, '65%'],
+            color: '#4a4a4a'
+          },
+          // 自定义指针的图片
+          /* pointer: {
+            icon: ''
+          }, */
+          data: [
+            {
+              value: 10,
+              name: '浏览量',
+              itemStyle: {
+                color: '#fa6400'
+              }
+            }
+          ]
+        }
+      ]
+    }
+    echartIns.setOption(options)
+  </script>
+</body>
+</html>
